@@ -1,0 +1,17 @@
+Copyright (c) 2026 Ravenex Technologies Private Limited. All rights reserved.
+
+This software and its documentation are proprietary to Ravenex Technologies Private Limited.
+
+Evaluation permission: the Assam State Space Applications Centre (ASSAC), the Department of Science &
+Technology, Government of Assam, Assam Startup and the evaluators of the North East Seva First Innovation
+Challenge (NESFIC) 2026 may download, install, run, inspect and test this software solely to evaluate
+Ravenex Technologies' proposal for challenge NESFIC-D-19.
+
+No other right is granted. Copying, modifying, distributing or using this software for any other purpose
+requires prior written permission from Ravenex Technologies Private Limited.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE USE OF THE SOFTWARE.
+
+Third-party data: Sentinel-1 and Sentinel-2 imagery fetched at run time are Copernicus data, used under the
+Copernicus data licence. Third-party Python libraries listed in requirements.txt are under their own licences.

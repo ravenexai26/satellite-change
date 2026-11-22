@@ -1,0 +1,71 @@
+# Ravenex satellite change map - run configuration
+# Every value used by the pipeline comes from this file. Edit it, then run:
+#   python run.py --config config.yaml
+
+project:
+  name: "Brahmaputra river change, Dhubri border stretch"
+  organisation: "Ravenex Technologies Private Limited"
+  output_dir: "output"          # results are written here
+  work_dir: "work"              # downloaded scenes and intermediate files
+
+area:
+  # Area of interest, WGS84 degrees: [west, south, east, north].
+  # Approximate starting box; adjust so the whole river corridor plus ~2 km is inside.
+  bbox: [89.70, 25.75, 90.10, 26.15]
+  crs: "EPSG:32646"             # one projected grid for every image (UTM 46N)
+  resolution_m: 10
+
+periods:
+  before: {start: "2025-10-15", end: "2025-11-30", label: "Post-monsoon 2025"}
+  after:  {start: "2026-10-15", end: "2026-11-21", label: "Post-monsoon 2026"}
+
+scenes:
+  source: "cdse"                # "cdse" (Copernicus Data Space) or "local" (your own GeoTIFFs)
+  min_per_period: 3             # 4 or more recommended
+  orbit_direction: null         # null = choose automatically; or "ASCENDING" / "DESCENDING"
+  relative_orbit: null          # null = choose automatically; or an integer
+  min_aoi_coverage: 0.95        # a pass must cover at least this share of the area
+  local_manifest: "local_scenes.csv"   # used only when source = "local"
+
+processing:
+  backscatter: "GAMMA0_TERRAIN" # terrain-flattened gamma0, computed by Copernicus with the Copernicus 30 m DEM
+  dem: "COPERNICUS_30"
+  speckle_filter: {type: "lee", window: 5, enl: 4.4}
+  water_band: "VV"
+  use_vh_confirmation: false    # true = a pixel is water only if VV and VH are both below their thresholds
+  otsu_tile_px: 200             # tile size for split-based Otsu (200 px = 2 km)
+  otsu_min_tiles: 5
+  expected_threshold_db: [-26, -12]   # a threshold outside this range is flagged in the log
+
+change:
+  # water_to_land: water in >= 75% of before scenes and <= 25% of after scenes; land_to_water the reverse.
+  # With 4 scenes per period this tolerates one wrong scene (wind, wet sand); with 3 it needs all 3 to agree.
+  water_before_min: 0.75
+  water_after_max: 0.25
+  min_area_ha: 0.5
+  calibration_max_diff_db: 1.0
+
+priority:
+  high_area_ha: 5.0
+  high_confidence: 0.8
+  medium_area_ha: 1.0
+  near_boundary_km: 2.0         # used only if boundary_file is set
+
+reference:
+  # Survey of India international boundary (GeoJSON / Shapefile / GPKG). Leave empty to omit.
+  # Do NOT use OpenStreetMap, Google or Natural Earth boundaries.
+  boundary_file: ""
+  places:                       # labels shown on maps (approximate positions; edit freely)
+    - {name: "Dhubri", lon: 89.98, lat: 26.02}
+
+validation:
+  sample_change: 30
+  sample_nochange: 30
+  nochange_buffer_m: 100
+  seed: 2026
+  sentinel2_max_cloud: 10
+  sentinel2_window_days: 20
+
+outputs:
+  max_evidence_chips: 200
+  credit: "Contains modified Copernicus Sentinel data (2025-2026)"

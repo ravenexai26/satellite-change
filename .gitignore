@@ -1,0 +1,8 @@
+work/
+work_demo/
+output/
+output_demo/
+.venv/
+__pycache__/
+runs/
+frontend/node_modules/

@@ -1,0 +1,2 @@
+path,date,period,satellite,orbit_direction,relative_orbit,vv_band,vh_band,units,vh_path
+data/S1C_20251101_VV.tif,2025-11-01,before,S1C,ASCENDING,41,1,1,linear,data/S1C_20251101_VH.tif

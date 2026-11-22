@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --font-sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --color-navy-50: #eef4fa;
+  --color-navy-100: #d7e5f2;
+  --color-navy-600: #145a93;
+  --color-navy-700: #0f4a7a;
+  --color-navy-800: #0b3a63;
+  --color-navy-900: #082a48;
+  --color-land: #E69F00;
+  --color-water: #0072B2;
+}
+
+body { @apply bg-slate-50 text-slate-800 antialiased; }
+@utility card { @apply rounded-xl border border-slate-200 bg-white shadow-sm; }
+@utility btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50; }
+@utility btn-primary { @apply btn bg-navy-700 text-white hover:bg-navy-800; }
+@utility btn-secondary { @apply btn border border-slate-300 bg-white text-slate-700 hover:bg-slate-50; }
+@utility btn-danger { @apply btn border border-red-300 bg-white text-red-700 hover:bg-red-50; }
+@utility input { @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm focus:border-navy-600 focus:ring-2 focus:ring-navy-100 focus:outline-none; }
+@utility label { @apply mb-1 block text-xs font-semibold tracking-wide text-slate-600 uppercase; }
+.leaflet-container { font-family: inherit; }
+.leaflet-container.drawing { cursor: crosshair; }
